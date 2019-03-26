@@ -34,7 +34,6 @@ Name of the venue
 Venue location
 Date of the Event (use moment to format this as "MM/DD/YYYY")
 */
-function concertThis() {}
 
 /*
 spotify-this-song
@@ -66,7 +65,50 @@ npm init -y
 npm i axios
 */
 
-/*
+//Takes a movie name with multiple words
+var movieName = "";
+movieName = process.argv;
+console.log(movieName);
+movieName.shift();
+movieName.shift();
+movieName.join("");
+console.log(movieName);
+
+var queryUrl =
+  "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+
+// var response = response.data;
+axios.get(queryUrl).then(function(response) {
+  console.log(
+    "Movie Title: " +
+      response.data.Title +
+      " " +
+      "\r\n" +
+      "Release Year: " +
+      response.data.Year +
+      " " +
+      "\r\n" +
+      "IMDB Rating: " +
+      response.data.imdbRating +
+      +" " +
+      "\r\n" +
+      "Country Produced: " +
+      response.data.Country +
+      " " +
+      "\r\n" +
+      "Language: " +
+      response.data.Language +
+      " " +
+      "\r\n" +
+      "Plot: " +
+      response.data.Plot +
+      " " +
+      "\r\n" +
+      "Actors: " +
+      response.data.Actors
+  );
+
+  /*
 do-what-it-says
 npm init -y
 npm i npm i file-system
@@ -74,3 +116,4 @@ writeFile random.txt
 It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
 Edit the text in random.txt to test out the feature for movie-this and concert-this.
 */
+});
