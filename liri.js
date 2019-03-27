@@ -1,30 +1,41 @@
 //Node modules needed to run the functions:
-require("dotenv").config(); //loads environment variables from .env
-var keys = require("./keys.js"); //loads keys to app
-var fs = require("fs"); // read and writes files
-var axios = require("axios"); //performs API requests to backend
-var Spotify = require("node-spotify-api"); // API library for Spotify REST API
+//loads environment variables from .env
+require("dotenv").config();
 
+//loads keys to app
+var keys = require("./keys.js");
+
+// read and writes files
+var fs = require("fs");
+
+//formatting dates
+var moment = require("moment");
+
+//performs API requests to backend
+var axios = require("axios");
+
+//Spotify API library:
+var Spotify = require("node-spotify-api"); // API library for Spotify REST API
 var spotify = new Spotify(keys.spotify);
 
 //2nd index position for action command in terminal
 //3rd index position is holding the user's input
 var action = process.argv[2];
-var userChoice = process.argv[3]; //what is this doing?
+var userQuery = process.argv.slice(3).join(" ");
 
 //Commands for liri app:
-function commands(action, userChoice) {
-  switch (action) {
+function commands(thingToDo, thing) {
+  switch (thingToDo) {
     case "concert-this":
-      concertThis(userChoice);
+      concertThis(thing);
       break;
 
     case "spotify-this-song":
-      spotifyThisSong();
+      spotifyThisSong(thing);
       break;
 
     case "movie-this":
-      movieThis(userChoice);
+      movieThis(thing);
       break;
 
     case "do-what-it-says":
@@ -38,34 +49,22 @@ function commands(action, userChoice) {
       );
   }
 }
+commands(action, userQuery);
 
 //Functions for liri commands:
-var artistName = "";
-artistName = process.argv;
-console.log(artistName);
-artistName.shift();
-artistName.shift();
-artistName.join("");
-console.log(artistName);
 
-var queryUrl =
-  "https://rest.bandsintown.com/artists/" +
-  artistName +
-  "/events?app_id=codingbootcamp";
+function concertThis(input) {
+  var queryUrl =
+    "https://rest.bandsintown.com/artists/" +
+    input +
+    "/events?app_id=codingbootcamp";
 
-axios.get(queryUrl).then(function(response) {
-  console.log(response.venue[1].name);
-});
-
-//function concertThis(input) {}
-
-/*concert-this
-node liri.js concert-this <artist/band name here>
-Outputs: 
-Name of the venue
-Venue location
-Date of the Event (use moment to format this as "MM/DD/YYYY")
-*/
+  axios.get(queryUrl).then(function(response) {
+    console.log(response.data[0].venue.name);
+    console.log(response.data[0].venue.city);
+    console.log(response.data[0].datetime);
+  });
+}
 
 /*
 spotify-this-song
@@ -84,74 +83,94 @@ npm i node-spotify-api
 movie-this
 node liri.js movie-this '<movie name here>'
 Outputs: 
-  * Title of the movie.
-   * Year the movie came out.
-   * IMDB Rating of the movie.
-   * Rotten Tomatoes Rating of the movie.
-   * Country where the movie was produced.
-   * Language of the movie.
-   * Plot of the movie.
-   * Actors in the movie.
+* Title of the movie.
+* Year the movie came out.
+* IMDB Rating of the movie.
+* Rotten Tomatoes Rating of the movie.
+* Country where the movie was produced.
+* Language of the movie.
+* Plot of the movie.
+* Actors in the movie.
 If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 */
 
-/*Takes a movie name with multiple words
-var movieName = "";
-movieName = process.argv;
-console.log(movieName);
-movieName.shift();
-movieName.shift();
-movieName.join("");
-console.log(movieName);
-
-var queryUrl =
-  "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-
-// var response = response.data;
-axios.get(queryUrl).then(function(response) {
-  console.log(
-    "Movie Title: " +
-      response.data.Title +
-      " " +
-      "\r\n" +
-      "Release Year: " +
-      response.data.Year +
-      " " +
-      "\r\n" +
-      "IMDB Rating: " +
-      response.data.imdbRating +
-      +" " +
-      "\r\n" +
-      "Country Produced: " +
-      response.data.Country +
-      " " +
-      "\r\n" +
-      "Language: " +
-      response.data.Language +
-      " " +
-      "\r\n" +
-      "Plot: " +
-      response.data.Plot +
-      " " +
-      "\r\n" +
-      "Actors: " +
-      response.data.Actors
-  );
-  function movieThis() {
-    var movieName = process.argv[3];
-    if (!movie) {
-      movie = "mr nobody";
-    }
-    request(
-      "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy", function (response, err)
+function movieThis(input) {
+  var queryUrl =
+    "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=trilogy";
+  axios.get(queryUrl).then(function(response) {
+    console.log(
+      "Movie Title: " +
+        response.data.Title +
+        " " +
+        "\r\n" +
+        "Release Year: " +
+        response.data.Year +
+        " " +
+        "\r\n" +
+        "IMDB Rating: " +
+        response.data.imdbRating +
+        +" " +
+        "\r\n" +
+        "Country Produced: " +
+        response.data.Country +
+        " " +
+        "\r\n" +
+        "Language: " +
+        response.data.Language +
+        " " +
+        "\r\n" +
+        "Plot: " +
+        response.data.Plot +
+        " " +
+        "\r\n" +
+        "Actors: " +
+        response.data.Actors
     );
-  }
-  /*
-do-what-it-says
-npm init -y
-npm i npm i file-system
-writeFile random.txt 
-It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
-Edit the text in random.txt to test out the feature for movie-this and concert-this.
+  });
+}
 
-});*/
+/*
+      do-what-it-says
+      npm init -y
+      npm i npm i file-system
+      writeFile random.txt 
+      It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
+      Edit the text in random.txt to test out the feature for movie-this and concert-this.
+  */
+
+/* movie-this: mr.nobody if else/switch statement default
+   if ((input = [""])) {
+    var queryUrl =
+      "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
+    axios.get(queryUrl).then(function(response) {
+      console.log(
+        "Movie Title: " +
+          response.data.Title +
+          " " +
+          "\r\n" +
+          "Release Year: " +
+          response.data.Year +
+          " " +
+          "\r\n" +
+          "IMDB Rating: " +
+          response.data.imdbRating +
+          +" " +
+          "\r\n" +
+          "Country Produced: " +
+          response.data.Country +
+          " " +
+          "\r\n" +
+          "Language: " +
+          response.data.Language +
+          " " +
+          "\r\n" +
+          "Plot: " +
+          response.data.Plot +
+          " " +
+          "\r\n" +
+          "Actors: " +
+          response.data.Actors
+    });
+   
+    } else{
+      */
