@@ -51,7 +51,7 @@ function commands(thingToDo, thing) {
 }
 commands(action, userQuery);
 
-//Functions for liri commands:
+//FUNCTIONS FOR LIRI COMMANDS:
 
 function concertThis(input) {
   var queryUrl =
@@ -60,9 +60,15 @@ function concertThis(input) {
     "/events?app_id=codingbootcamp";
 
   axios.get(queryUrl).then(function(response) {
-    console.log(response.data[0].venue.name);
-    console.log(response.data[0].venue.city);
-    console.log(response.data[0].datetime);
+    for (i = 0; i < 10; i++)
+      console.log(
+        "Venue: " +
+          response.data[i].venue.name +
+          "\n Location: " +
+          response.data[i].venue.city +
+          "\n Date: " +
+          moment(response.data[i].datetime).format("MM/DD/YYYY")
+      );
   });
 }
 
@@ -77,21 +83,6 @@ The album that the song is from
 If no song is provided then your program will default to "The Sign" by Ace of Base.
 npm init -y
 npm i node-spotify-api
-*/
-
-/*
-movie-this
-node liri.js movie-this '<movie name here>'
-Outputs: 
-* Title of the movie.
-* Year the movie came out.
-* IMDB Rating of the movie.
-* Rotten Tomatoes Rating of the movie.
-* Country where the movie was produced.
-* Language of the movie.
-* Plot of the movie.
-* Actors in the movie.
-If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 */
 
 function movieThis(input) {
@@ -139,7 +130,10 @@ function movieThis(input) {
   */
 
 //============================================================================================================
-/* movie-this: mr.nobody if else/switch statement default
+/* 
+
+If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
+movie-this: mr.nobody if else/switch statement work in progress
    if ((input = [""])) {
     var queryUrl =
       "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
