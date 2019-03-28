@@ -52,7 +52,6 @@ function commands(thingToDo, thing) {
 commands(action, userQuery);
 
 //FUNCTIONS FOR LIRI COMMANDS:
-
 function concertThis(input) {
   var queryUrl =
     "https://rest.bandsintown.com/artists/" +
