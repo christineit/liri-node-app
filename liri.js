@@ -72,9 +72,9 @@ function concertThis(input) {
 }
 
 function spotifyThisSong() {
-  // if (!userQuery) {
-  //   userQuery = "the sign ace of base";
-  // } else {
+  if (!userQuery) {
+    userQuery = "the sign ace of base";
+  }
   spotify.search({ type: "track", query: userQuery }, function(err, data) {
     if (err) {
       return console.log("Error occurred: " + err);
@@ -95,9 +95,9 @@ function spotifyThisSong() {
 //}
 
 function movieThis(input) {
-  // if (!input) {
-  //   input = "mr nobody";
-  // } else {
+  if (!input) {
+    input = "mr nobody";
+  }
   var queryUrl =
     "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=trilogy";
   axios.get(queryUrl).then(function(response) {
@@ -147,47 +147,4 @@ function doWhatItSays() {
 //}
 //============================================================================================================
 
-/*
-spotify-this-song
-If no song is provided then your program will default to "The Sign" by Ace of Base.
-
-
-Edit the text in random.txt to test out the feature for movie-this and concert-this.
-
-If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-movie-this: mr.nobody if else/switch statement work in progress
-   if ((input = [""])) {
-    var queryUrl =
-      "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
-    axios.get(queryUrl).then(function(response) {
-      console.log(
-        "Movie Title: " +
-          response.data.Title +
-          " " +
-          "\r\n" +
-          "Release Year: " +
-          response.data.Year +
-          " " +
-          "\r\n" +
-          "IMDB Rating: " +
-          response.data.imdbRating +
-          +" " +
-          "\r\n" +
-          "Country Produced: " +
-          response.data.Country +
-          " " +
-          "\r\n" +
-          "Language: " +
-          response.data.Language +
-          " " +
-          "\r\n" +
-          "Plot: " +
-          response.data.Plot +
-          " " +
-          "\r\n" +
-          "Actors: " +
-          response.data.Actors
-    });
-   
-    } else{
-      */
+//Edit the text in random.txt to test out the feature for movie-this and concert-this.
