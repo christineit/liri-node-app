@@ -5,7 +5,7 @@
 1. Make sure to open the terminal on the liri.js file.
 2. Install the necessary npm packages for the app.
 
-## Demo:
+## Demo(gifs need to be updated to account for changes made 3/28/19):
 
 ###### Pt. 1 showcases the liri commands:
 
