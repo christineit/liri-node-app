@@ -23,7 +23,7 @@ var spotify = new Spotify(keys.spotify);
 var action = process.argv[2];
 var userQuery = process.argv.slice(3).join(" ");
 
-//Commands for liri app:
+//COMMANDS FOR LIRI APP:
 function commands(thingToDo, thing) {
   switch (thingToDo) {
     case "concert-this":
@@ -72,18 +72,25 @@ function concertThis(input) {
   });
 }
 
-/*
-spotify-this-song
-node liri.js spotify-this-song '<song name here>'
-Outputs:
-Artist(s)
-The song's name
-A preview link of the song from Spotify
-The album that the song is from
-If no song is provided then your program will default to "The Sign" by Ace of Base.
-npm init -y
-npm i node-spotify-api
-*/
+function spotifyThisSong() {
+  //var input = "";
+  spotify.search({ type: "track", query: userQuery }, function(err, data) {
+    if (err) {
+      return console.log("Error occurred: " + err);
+    }
+    console.log(
+      "Artist: " +
+        data.tracks.items[0].artists[0].name +
+        "\nSong's Name: " +
+        data.tracks.items[0].name +
+        "\nPreview URL: " +
+        data.tracks.items[0].preview_url +
+        "\nAlbum: " +
+        data.tracks.items[0].album.name +
+        "\n"
+    );
+  });
+}
 
 function movieThis(input) {
   var queryUrl =
@@ -120,17 +127,27 @@ function movieThis(input) {
   });
 }
 
-/*
-      do-what-it-says
-      npm init -y
-      npm i npm i file-system
-      writeFile random.txt 
-      It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
-      Edit the text in random.txt to test out the feature for movie-this and concert-this.
-  */
+//reads the random.txt file and runs the spotify-this-song command
+function doWhatItSays() {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    if (error) {
+      console.log("Error: " + error);
+    }
+    var randomText = data.split(",");
+    userQuery = randomText[1];
+    console.log("It worked!");
+    spotifyThisSong();
+  });
+}
 
 //============================================================================================================
-/* 
+
+/*
+spotify-this-song
+If no song is provided then your program will default to "The Sign" by Ace of Base.
+
+
+Edit the text in random.txt to test out the feature for movie-this and concert-this.
 
 If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 movie-this: mr.nobody if else/switch statement work in progress
