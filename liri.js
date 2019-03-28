@@ -72,7 +72,9 @@ function concertThis(input) {
 }
 
 function spotifyThisSong() {
-  //var input = "";
+  // if (!userQuery) {
+  //   userQuery = "the sign ace of base";
+  // } else {
   spotify.search({ type: "track", query: userQuery }, function(err, data) {
     if (err) {
       return console.log("Error occurred: " + err);
@@ -90,8 +92,12 @@ function spotifyThisSong() {
     );
   });
 }
+//}
 
 function movieThis(input) {
+  // if (!input) {
+  //   input = "mr nobody";
+  // } else {
   var queryUrl =
     "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=trilogy";
   axios.get(queryUrl).then(function(response) {
@@ -138,7 +144,7 @@ function doWhatItSays() {
     spotifyThisSong();
   });
 }
-
+//}
 //============================================================================================================
 
 /*
