@@ -5,7 +5,7 @@
 1. Make sure to open the terminal on the liri.js file.
 2. Install the necessary npm packages for the app.
 
-## Demo(gifs need to be updated to account for changes made 3/28/19):
+## Demo:
 
 ###### Pt. 1 showcases the liri commands:
 
@@ -17,11 +17,11 @@
 
 ###### Pt. 3 showcases the spotify-this-song command:
 
-![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.3%20spotify-this-song.gif)
+![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.3%20spotify-this-song%202.gif)
 
 ###### Pt. 4 showcases the movie-this command:
 
-![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.4%20movie-this.gif)
+![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.4%20movie-this%202.gif)
 
 ###### Pt. 5 showcases the do-what-it-says command:
 
