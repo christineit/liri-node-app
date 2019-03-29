@@ -9,11 +9,11 @@
 
 ###### Pt. 1 showcases the liri commands:
 
-![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.1-commands.gif)
+![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.1-commands%202.gif)
 
 ###### Pt. 2 showcases the concert-this command:
 
-![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.2%20concert-this.gif)
+![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.2%20concert-this%202.gif)
 
 ###### Pt. 3 showcases the spotify-this-song command:
 
@@ -25,4 +25,4 @@
 
 ###### Pt. 5 showcases the do-what-it-says command:
 
-![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.5%20do-what-it-says.gif)
+![alt-text](https://github.com/christineit/liri-node-app/blob/master/assets/images/pt.5%20do-what-it-says%202.gif)
