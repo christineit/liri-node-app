@@ -61,7 +61,8 @@ function concertThis(input) {
   axios.get(queryUrl).then(function(response) {
     for (i = 0; i < 10; i++)
       console.log(
-        "Venue: " +
+        "------------------------------------------------" +
+          "\n Venue: " +
           response.data[i].venue.name +
           "\n Location: " +
           response.data[i].venue.city +
