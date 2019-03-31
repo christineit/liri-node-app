@@ -56,12 +56,14 @@ commands(action, userQuery);
 
 //FUNCTIONS FOR LIRI COMMANDS:
 function concertThis(input) {
+  //nodconsole.log(input);
   var queryUrl =
     "https://rest.bandsintown.com/artists/" +
     input +
     "/events?app_id=codingbootcamp";
 
   axios.get(queryUrl).then(function(response) {
+    console.log(response.data);
     for (i = 0; i < 10; i++)
       console.log(
         "------------------------------------------------" +
@@ -75,11 +77,11 @@ function concertThis(input) {
   });
 }
 
-function spotifyThisSong() {
-  if (!userQuery) {
-    userQuery = "the sign ace of base";
+function spotifyThisSong(input) {
+  if (!input) {
+    input = "the sign ace of base";
   }
-  spotify.search({ type: "track", query: userQuery }, function(err, data) {
+  spotify.search({ type: "track", query: input }, function(err, data) {
     if (err) {
       return console.log("Error occurred: " + err);
     }
@@ -143,9 +145,11 @@ function doWhatItSays() {
       console.log("Error: " + error);
     }
     var randomText = data.split(",");
-    userQuery = randomText[1];
-    console.log("It worked!");
-    spotifyThisSong();
+    var action = randomText[0];
+    var userQuery = randomText[1];
+    //console.log(action, userQuery);
+    //console.log("It worked!");
+    commands(action, userQuery);
   });
 }
 //}
