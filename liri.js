@@ -18,6 +18,9 @@ var axios = require("axios");
 var Spotify = require("node-spotify-api"); // API library for Spotify REST API
 var spotify = new Spotify(keys.spotify);
 
+//Cool terminal font
+var figlet = require("figlet");
+
 //2nd index position for action command in terminal
 //3rd index position is holding the user's input
 var action = process.argv[2];
